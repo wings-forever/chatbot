@@ -33,10 +33,14 @@ while True:
         driver.get(link)
 
         #댓글
-        comments=driver.find_elements_by_css_selector("div.comments > article.parent > p.large") #div.comments만 하면 익명,대댓글,공강,쪽지,댓글단 시간 다 나옴;;;
+        comments=driver.find_elements_by_css_selector("div.comments > article.parent > p.large") #가장 상위 댓글
+        child_comments=driver.find_elements_by_css_selector("div.comments > article.child > p.large") #대댓글
 
         for comment in comments:
             results.append(comment.text)
+           
+        for child_comment in chil_comments:
+            results.append(child_comment.text)
 
 with open("에브리타임에타조교크롤링.csv", "w", newline="", encoding="UTF-8-sig") as f:
     writer=csv.writer(f)
